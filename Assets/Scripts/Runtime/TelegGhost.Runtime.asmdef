@@ -1,0 +1,9 @@
+{
+    "name": "TelegGhost.Runtime",
+    "rootNamespace": "TelegGhost.Runtime",
+    "references": [
+        "Unity.InputSystem",
+        "Unity.RenderPipelines.Universal.2D.Runtime"
+    ],
+    "autoReferenced": true
+}
