@@ -17,6 +17,7 @@ namespace TelegGhost.Tests
         public void SetUp()
         {
             playerObject = new GameObject("Player_Test") { layer = 8 };
+            playerObject.transform.position = new Vector3(0f, 50f, 0f);
             playerObject.AddComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
             playerObject.AddComponent<BoxCollider2D>();
             PlayerController2D player = playerObject.AddComponent<PlayerController2D>();
@@ -36,7 +37,7 @@ namespace TelegGhost.Tests
             awake?.Invoke(vision, null);
 
             targetObject = new GameObject("Target_Test") { layer = 9 };
-            targetObject.transform.position = new Vector3(4f, 0f);
+            targetObject.transform.position = new Vector3(4f, 50f);
             targetCollider = targetObject.AddComponent<BoxCollider2D>();
             Physics2D.SyncTransforms();
         }
@@ -73,7 +74,7 @@ namespace TelegGhost.Tests
         private static GameObject CreateWall(bool isTrigger)
         {
             GameObject wall = new GameObject("Wall_Test");
-            wall.transform.position = new Vector3(2f, 0f);
+            wall.transform.position = new Vector3(2f, 50f);
             BoxCollider2D collider = wall.AddComponent<BoxCollider2D>();
             collider.size = new Vector2(0.5f, 2f);
             collider.isTrigger = isTrigger;

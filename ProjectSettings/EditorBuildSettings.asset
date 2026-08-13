@@ -6,11 +6,53 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scene/Mockup/TELEGHOST_PulseMockup.unity
-    guid: 44f4bb3cc941bf8499cc8d1ab16305b7
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
+    path: Assets/Scene/Game/System/StageSelect.unity
+    guid: 2c980e3e61597c14a856099c85ed31bc
+  - enabled: 1
+    path: Assets/Scene/Game/Stages/Stage01_TELE.unity
+    guid: e59a06d951a39084389b628ee147531f
+  - enabled: 1
+    path: Assets/Scene/Game/Stages/Stage02_STAR.unity
+    guid: 35787c77494815c4da59933626910da3
+  - enabled: 1
+    path: Assets/Scene/Game/Stages/Stage03_DualBasics.unity
+    guid: 6a6d766b63b73d14395cd9350878aa1f
+  - enabled: 1
+    path: Assets/Scene/Game/Stages/Stage04_Rideable.unity
+    guid: 0183a1b8aaac7ad4f88294e0eb5c713f
+  - enabled: 1
+    path: Assets/Scene/Game/Stages/Stage05_RideAndSwitch.unity
+    guid: 8cd67245f81ce4047812ae9c6f408bc4
+  - enabled: 1
+    path: Assets/Scene/Game/Stages/Stage06_GiantTELE.unity
+    guid: 14d7c7d8c2ea65840acc2616ec7bbd1a
+  - enabled: 1
+    path: Assets/Scene/Game/Stages/Stage07_DualControl.unity
+    guid: 0c48c2750a00c45479c8ef870f6c0988
+  - enabled: 1
+    path: Assets/Scene/Game/Stages/Stage08_Reuse.unity
+    guid: e030f9ffc88512a4f9fd878c370ddccd
+  - enabled: 1
+    path: Assets/Scene/Game/Stages/Stage09_Vertical.unity
+    guid: a3c69d13c465f224d94289cc675998fe
+  - enabled: 1
+    path: Assets/Scene/Game/Stages/Stage10_RealtimeView.unity
+    guid: 91bd490aa7e0b164bb967006c5421c2b
+  - enabled: 1
+    path: Assets/Scene/Game/Stages/Stage11_MultiSwitch.unity
+    guid: 32d237b003d5a054cb3dbb3033ee9b4a
+  - enabled: 1
+    path: Assets/Scene/Game/Stages/Stage12_IntenseMix.unity
+    guid: 2334eed669016a34ea5a9811edeadd46
+  - enabled: 1
+    path: Assets/Scene/Game/Stages/Stage13_STARChain.unity
+    guid: 5d1d9ace802888a479d115bb7caaf979
+  - enabled: 1
+    path: Assets/Scene/Game/Stages/Stage14_DensePuzzle.unity
+    guid: 5640fe3c2ad990542a46beb25e722606
+  - enabled: 1
+    path: Assets/Scene/Game/Stages/Stage15_Finale.unity
+    guid: 73a78f7dff33d7445b95a71382f72cfc
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

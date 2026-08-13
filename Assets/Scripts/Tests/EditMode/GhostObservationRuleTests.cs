@@ -55,8 +55,8 @@ namespace TelegGhost.Tests
 
         [TestCase(1, false, 1f, 0f)]
         [TestCase(-1, false, -1f, 0f)]
-        [TestCase(1, true, 0.7071068f, 0.7071068f)]
-        [TestCase(-1, true, -0.7071068f, 0.7071068f)]
+        [TestCase(1, true, 0.8191520f, 0.5735764f)]
+        [TestCase(-1, true, -0.8191520f, 0.5735764f)]
         public void ViewDirectionHasFourDiscreteStates(
             int horizontalSign,
             bool lookUp,

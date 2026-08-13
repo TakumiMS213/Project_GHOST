@@ -1,0 +1,11 @@
+{
+    "name": "TelegGhost.Tests.PlayMode",
+    "rootNamespace": "TelegGhost.Tests",
+    "references": [
+        "TelegGhost.Runtime"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "autoReferenced": false
+}

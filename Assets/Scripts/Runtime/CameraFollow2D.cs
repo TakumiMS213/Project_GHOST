@@ -12,7 +12,7 @@ namespace TelegGhost.Runtime
         [SerializeField] private float maximumY = 8f;
         [SerializeField] private float fixedY;
         [SerializeField] private bool followTargetY;
-        [SerializeField] private Vector2 viewOffset = new Vector2(1.6f, 1.1f);
+        [SerializeField] private Vector2 viewOffset = new Vector2(1.5f, 0.8f);
         [SerializeField] private float smoothTime = 0.18f;
 
         private Vector3 smoothVelocity;

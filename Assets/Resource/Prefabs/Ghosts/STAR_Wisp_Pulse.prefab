@@ -157,6 +157,9 @@ MonoBehaviour:
   controlledBody: {fileID: 1116595144305517168}
   movementCollider: {fileID: 8701015154312045349}
   actionDirection: {x: 1, y: 0}
+  routeMode: 0
+  pathGridCount: 3
+  directionIndicator: {fileID: 5532008716575993942}
   gridSize: 1.5
   moveDuration: 0.14
   impactHoldDuration: 0.055
@@ -197,7 +200,7 @@ MonoBehaviour:
   ghostController: {fileID: 8681470514784736526}
   ghostAction: {fileID: 7462949850270967603}
   pulseVisual: {fileID: 2241490643992691925}
-  pulseInterval: 0.5
+  pulseInterval: 0.75
   completionFlashDuration: 0.06
 --- !u!1 &6218296421737390921
 GameObject:

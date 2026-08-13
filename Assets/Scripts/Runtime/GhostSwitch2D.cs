@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -19,6 +20,9 @@ namespace TelegGhost.Runtime
 
         private readonly HashSet<Collider2D> occupants = new HashSet<Collider2D>();
         private bool isActive;
+
+        public event Action<bool> StateChanged;
+        public bool IsActive => isActive;
 
         private void OnTriggerEnter2D(Collider2D other)
         {
@@ -54,6 +58,7 @@ namespace TelegGhost.Runtime
             if (active != isActive)
             {
                 isActive = active;
+                StateChanged?.Invoke(active);
                 stateChanged?.Invoke(active);
             }
         }

@@ -175,6 +175,10 @@ PrefabInstance:
       propertyPath: gridSize
       value: 1.15
       objectReference: {fileID: 0}
+    - target: {fileID: 7936297037210547912, guid: cf8438b7c0e1aea4e9d21b437d7899fa, type: 3}
+      propertyPath: pathGridCount
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4450,6 +4454,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room07_STAR_Collision
       objectReference: {fileID: 0}
+    - target: {fileID: 7462949850270967603, guid: 4d204b2f97e3ba94ebdb18163f5318f5, type: 3}
+      propertyPath: routeMode
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4832,6 +4840,10 @@ PrefabInstance:
       propertyPath: gridSize
       value: 1.25
       objectReference: {fileID: 0}
+    - target: {fileID: 9127033178792765801, guid: 92bc6a7331bdb3746917aa6e757e92f3, type: 3}
+      propertyPath: pathGridCount
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5058,6 +5070,10 @@ PrefabInstance:
     - target: {fileID: 7936297037210547912, guid: cf8438b7c0e1aea4e9d21b437d7899fa, type: 3}
       propertyPath: gridSize
       value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7936297037210547912, guid: cf8438b7c0e1aea4e9d21b437d7899fa, type: 3}
+      propertyPath: pathGridCount
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7936297037210547912, guid: cf8438b7c0e1aea4e9d21b437d7899fa, type: 3}
       propertyPath: actionDirection.x
@@ -5764,6 +5780,10 @@ PrefabInstance:
     - target: {fileID: 6440940003805630945, guid: f7aad22a885cbc74aab3e903b2e1e8cf, type: 3}
       propertyPath: m_Name
       value: Room05_TELE_Switcher
+      objectReference: {fileID: 0}
+    - target: {fileID: 5310243836654046737, guid: f7aad22a885cbc74aab3e903b2e1e8cf, type: 3}
+      propertyPath: pathGridCount
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

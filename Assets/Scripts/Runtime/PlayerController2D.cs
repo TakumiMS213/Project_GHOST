@@ -8,6 +8,8 @@ namespace TelegGhost.Runtime
     [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
     public sealed class PlayerController2D : MonoBehaviour
     {
+        private const float UpwardViewAngleDegrees = 35f;
+
         [SerializeField] private InputActionAsset inputActions;
         [SerializeField] private string actionMapName = "Gameplay";
         [SerializeField] private string moveActionName = "Move";
@@ -18,13 +20,15 @@ namespace TelegGhost.Runtime
         [SerializeField] private float moveSpeed = 6f;
         [SerializeField] private float groundAcceleration = 55f;
         [SerializeField] private float airAcceleration = 28f;
-        [SerializeField] private float jumpImpulse = 10f;
+        [SerializeField] private float jumpImpulse = 10.5f;
         [SerializeField] private float coyoteTime = 0.1f;
         [SerializeField] private float jumpBufferTime = 0.1f;
         [SerializeField] private Transform groundCheck;
         [SerializeField] private float groundCheckRadius = 0.16f;
         [SerializeField] private LayerMask groundMask;
         [SerializeField] private Transform facingRoot;
+        [SerializeField] private int initialViewHorizontalSign = 1;
+        [SerializeField] private bool initialLookingUp;
 
         private Rigidbody2D cachedRigidbody;
         private InputActionMap gameplayMap;
@@ -67,6 +71,7 @@ namespace TelegGhost.Runtime
             resetAction = gameplayMap?.FindAction(resetActionName, false);
             toggleViewAction = gameplayMap?.FindAction(toggleViewActionName, false);
             lookUpAction = gameplayMap?.FindAction(lookUpActionName, false);
+            ResetView();
         }
 
         private void OnEnable()
@@ -157,10 +162,29 @@ namespace TelegGhost.Runtime
             }
         }
 
+        public void ConfigureInitialView(int horizontalSign, bool lookUp)
+        {
+            initialViewHorizontalSign = horizontalSign >= 0 ? 1 : -1;
+            initialLookingUp = lookUp;
+            ResetView();
+        }
+
+        public void ResetView()
+        {
+            lookingUp = initialLookingUp;
+            SetViewHorizontal(initialViewHorizontalSign);
+        }
+
         public static Vector2 ComposeViewDirection(int horizontalSign, bool lookUp)
         {
             float x = horizontalSign >= 0 ? 1f : -1f;
-            return lookUp ? new Vector2(x, 1f).normalized : new Vector2(x, 0f);
+            if (!lookUp)
+            {
+                return new Vector2(x, 0f);
+            }
+
+            float radians = UpwardViewAngleDegrees * Mathf.Deg2Rad;
+            return new Vector2(x * Mathf.Cos(radians), Mathf.Sin(radians));
         }
 
         private void SetViewHorizontal(int sign)

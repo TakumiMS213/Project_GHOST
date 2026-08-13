@@ -2,51 +2,49 @@ using UnityEngine;
 
 namespace TelegGhost.Runtime
 {
-    [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(Collider2D))]
     public sealed class DoorController2D : MonoBehaviour
     {
-        [SerializeField] private Vector2 openOffset = Vector2.up * 3f;
-        [SerializeField] private float moveSpeed = 4f;
+        [SerializeField] private Collider2D blockingCollider;
+        [SerializeField] private GameObject closedVisual;
 
-        private Rigidbody2D cachedRigidbody;
-        private Vector2 closedPosition;
-        private bool isOpen;
+        public bool IsOpen { get; private set; }
 
         private void Awake()
         {
-            cachedRigidbody = GetComponent<Rigidbody2D>();
-            if (cachedRigidbody == null)
+            if (blockingCollider == null)
             {
-                enabled = false;
-                return;
+                blockingCollider = GetComponent<Collider2D>();
             }
-
-            closedPosition = transform.position;
-        }
-
-        private void FixedUpdate()
-        {
-            if (cachedRigidbody == null)
-            {
-                return;
-            }
-
-            Vector2 target = isOpen ? closedPosition + openOffset : closedPosition;
-            cachedRigidbody.MovePosition(Vector2.MoveTowards(cachedRigidbody.position, target, moveSpeed * Time.fixedDeltaTime));
+            ApplyState();
         }
 
         public void SetOpen(bool shouldOpen)
         {
-            isOpen = shouldOpen;
+            if (IsOpen == shouldOpen)
+            {
+                return;
+            }
+
+            IsOpen = shouldOpen;
+            ApplyState();
         }
 
         public void ResetState()
         {
-            isOpen = false;
-            if (cachedRigidbody != null)
+            IsOpen = false;
+            ApplyState();
+        }
+
+        private void ApplyState()
+        {
+            if (blockingCollider != null)
             {
-                cachedRigidbody.position = closedPosition;
-                cachedRigidbody.linearVelocity = Vector2.zero;
+                blockingCollider.enabled = !IsOpen;
+            }
+            if (closedVisual != null)
+            {
+                closedVisual.SetActive(!IsOpen);
             }
         }
     }

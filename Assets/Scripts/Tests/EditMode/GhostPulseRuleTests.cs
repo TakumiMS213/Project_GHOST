@@ -44,35 +44,84 @@ namespace TelegGhost.Tests
         }
 
         [Test]
+        public void PingPongRouteReversesOnlyAtEndpoints()
+        {
+            int gridIndex = 0;
+            int travelSign = 1;
+
+            CompleteRouteSteps(ref gridIndex, ref travelSign, 3, 2);
+            Assert.That(gridIndex, Is.EqualTo(2));
+            Assert.That(travelSign, Is.EqualTo(1));
+
+            CompleteRouteSteps(ref gridIndex, ref travelSign, 3, 1);
+            Assert.That(gridIndex, Is.EqualTo(3));
+            Assert.That(travelSign, Is.EqualTo(-1));
+
+            CompleteRouteSteps(ref gridIndex, ref travelSign, 3, 3);
+            Assert.That(gridIndex, Is.Zero);
+            Assert.That(travelSign, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void RouteEndpointReversalRequiresAnotherPulseToMoveBack()
+        {
+            int gridIndex = 2;
+            int travelSign = 1;
+
+            CompleteRouteSteps(ref gridIndex, ref travelSign, 3, 1);
+            Assert.That(gridIndex, Is.EqualTo(3));
+            Assert.That(travelSign, Is.EqualTo(-1));
+
+            CompleteRouteSteps(ref gridIndex, ref travelSign, 3, 1);
+            Assert.That(gridIndex, Is.EqualTo(2));
+        }
+
+        [TestCase("STAR_Platform_Pulse")]
+        [TestCase("STAR_Wisp_Pulse")]
+        [TestCase("TELE_Platform_Pulse")]
+        [TestCase("TELE_Wisp_Pulse")]
+        public void MovingGhostPrefabsUsePointSevenFiveSecondPulse(string prefabName)
+        {
+            GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(
+                $"Assets/Resource/Prefabs/Ghosts/{prefabName}.prefab");
+            Assert.That(prefab, Is.Not.Null);
+
+            GhostPulseController2D pulse = prefab.GetComponent<GhostPulseController2D>();
+            Assert.That(pulse, Is.Not.Null);
+            Assert.That(pulse.PulseInterval, Is.EqualTo(0.75f).Within(0.0001f));
+        }
+
+        [Test]
         public void ObserverUsesCenterPointAndSolidObstruction()
         {
-            GhostObserver2D observer = CreateObserver(Vector2.zero, Vector2.right);
-            Assert.That(observer.CanObserve(Vector2.zero), Is.True);
-            Assert.That(observer.CanObserve(new Vector2(4f, 0f)), Is.True);
+            Vector2 origin = new Vector2(0f, 50f);
+            GhostObserver2D observer = CreateObserver(origin, Vector2.right);
+            Assert.That(observer.CanObserve(origin), Is.True);
+            Assert.That(observer.CanObserve(new Vector2(4f, 50f)), Is.True);
 
             GameObject wall = new GameObject("Pulse_Wall_Test");
             createdObjects.Add(wall);
-            wall.transform.position = new Vector3(2f, 0f);
+            wall.transform.position = new Vector3(2f, 50f);
             wall.AddComponent<BoxCollider2D>().size = new Vector2(0.5f, 2f);
             Physics2D.SyncTransforms();
 
-            Assert.That(observer.CanObserve(new Vector2(4f, 0f)), Is.False);
+            Assert.That(observer.CanObserve(new Vector2(4f, 50f)), Is.False);
         }
 
         [Test]
         public void AnyObserverCanMarkPointObserved()
         {
-            GhostObserver2D away = CreateObserver(Vector2.zero, Vector2.left);
-            GhostObserver2D toward = CreateObserver(new Vector2(0f, 1f), Vector2.right);
+            GhostObserver2D away = CreateObserver(new Vector2(0f, 50f), Vector2.left);
+            GhostObserver2D toward = CreateObserver(new Vector2(0f, 51f), Vector2.right);
             var observers = new List<GhostObserver2D> { away, toward };
 
             Assert.That(
-                GhostObservationDetector2D.IsObservedByAny(new Vector2(4f, 1f), observers),
+                GhostObservationDetector2D.IsObservedByAny(new Vector2(4f, 51f), observers),
                 Is.True);
 
             toward.enabled = false;
             Assert.That(
-                GhostObservationDetector2D.IsObservedByAny(new Vector2(4f, 1f), observers),
+                GhostObservationDetector2D.IsObservedByAny(new Vector2(4f, 51f), observers),
                 Is.False);
         }
 
@@ -128,6 +177,23 @@ namespace TelegGhost.Tests
             observerObject.SetActive(true);
             Physics2D.SyncTransforms();
             return observer;
+        }
+
+        private static void CompleteRouteSteps(
+            ref int gridIndex,
+            ref int travelSign,
+            int gridCount,
+            int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                GhostMoveAction2D.CalculateNextPingPongStep(
+                    gridIndex,
+                    travelSign,
+                    gridCount,
+                    out gridIndex,
+                    out travelSign);
+            }
         }
     }
 }
